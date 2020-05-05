@@ -5,11 +5,11 @@
 #' @param instrument A twelve (12) character designator for the OOI instrument on the associated site and node. grep allows for use of substrings.
 #' @param method An indicator for how the data was delivered. Options are recovered_cspp, recovered_host, recovered_inst, streamed, telemetered.
 #' @param stream Optional: Default is an empty string. If utilized, it helps narrow URL selection to a single URL. grep allows for use of substrings.
-#' @param start_date The UTC start date of the data request in the format of YYYY-mm-dd.Default is 2010-01-01.
+#' @param start_date The UTC start date of the data request in the format of YYYY-mm-dd. Default is 2010-01-01.
 #' @param start_time The UTC start time of the data request in the format of HH:MM:SS. Default is 00:00:00.
 #' @param stop_date The UTC stop date of the data request in the format of YYYY-mm-dd. Default is 2040-12-31.
 #' @param stop_time The UTC stop time of the data request in the format of HH:MM:SS. Default is 23:59:59.
-#' @return The request URL generated from input parameters. If more than one URL is created from the inputs, a list of URLs is returned.
+#' @return The request URL generated from input parameters. If more than one URL is created from the inputs, a list of URLs is returned, prompting the user to finetune their selection.
 #' @examples
 #' url = ooi_create_url(site = 'CE02SHSP',node = 'PROFILER',instrument = 'CTD',method = 'recovered_cspp') #Requests CE02SHSP CTD data that was recovered from the profiler for the OOI lifespan (excluded parameters use defaults).
 #' url = ooi_create_url(site = 'CE05MOAS',node = 'GL382',instrument = 'DO',method = 'telemetered',start_date = '2019-01-10',stop_date = '2019-01-31') #Requests EA Glider 382 DO data that was telemetered from the glider for the first month of 2019.

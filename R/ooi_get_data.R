@@ -1,12 +1,14 @@
-#' Pull OOI data from local files into the workspace.
+#' Pull OOI data from local files (or OpenDAP urls) into the workspace.
 #'
-#' @param local A list of local fullpath filenames to pull data from.
-#' @param simplify_data A flag that will drop annoying variables from ingested data if set to TRUE. If set to FALSE, all variables are brought into the workspace.
-#' @return A list of two sublists. Sublist 1 is a dataframe of data if it is 1D and can be combined or a sublist of more sublists if only one dataset if imported, or if data is multidimensional.
+#' NOTE: The ncdf4 has an issue with accessing OpenDAP urls on Windows machines, thus data must be downloaded before reading it in. If using a MacOS or Linux machine, local parameter can be a list of OpenDAP urls.
+#'
+#' @param local A list of local fullpath filenames to pull data from. Can be created from ooi_download_data() or manually input.
+#' @param simplify_data A flag that will drop annoying variables from ingested data if set to TRUE. If set to FALSE, all variables are brought into the workspace. If set to TRUE, it will pull from the curated list of variables.
+#' @return A list of two sublists. Sublist 1 is a dataframe of data if it is 1D and can be combined or a sublist of more sublists if only one dataset if imported, or if data is 2D.
 #' Further sublists are named by the filename, but can also be called by position. Within the filename sublists exist data as lists. Did that make sense?
-#' Sublist 2 is a dataframe of imported variables and associated units.
+#' Sublist 2 is a dataframe of imported variables, associated units, and variable descriptions.
 #' @examples
-#' data_varunits = ooi_get_data(local,simplify_data = FALSE)
+#' lol = ooi_get_data(local,simplify_data = TRUE)
 
 
 ooi_get_data <- function(local,simplify_data = TRUE){

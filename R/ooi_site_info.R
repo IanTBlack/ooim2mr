@@ -1,12 +1,12 @@
-#' Get a lists of lists of site information
+#' Get a lists of lists of site information.
 #'
-#' @param site An eight (8) character designator for an OOI site. If left blank, this function will request metadata info all OOI assets.
+#' @param site An eight (8) character designator for an OOI site.
 #' @param user Your OOI API username.
 #' @param token Your OOI API token.
-#' @return A list of lists.
+#' @return A cascading list of lists. The first sublist layer consists of nodes. The layer in each node consists of the instruments connected to that node. Each layer under each instrument contains instrument metadata.
 #' @examples
-#' info = ooi_site_info(site = 'CE01ISSP','OOI-API-USERNAME-HERE','OOI-API-TOKEN-HERE')
-
+#' info = ooi_site_info(site = 'CE01ISSP', user = 'OOI-API-USERNAME-HERE', token = 'OOI-API-TOKEN-HERE')
+#' info = ooi_site_info(site = 'CE05MOAS','OOI-API-USERNAME-HERE','OOI-API-TOKEN-HERE')
 
 ooi_site_info <- function(site,user,token){
   require(httr)

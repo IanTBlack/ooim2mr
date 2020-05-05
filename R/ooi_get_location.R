@@ -1,10 +1,10 @@
-#' Check data request made to OOINet.
+#' Check data request made to OOINet and return OpenDAP urls when complete.
 #'
-#' @param response The response object made through the ooi_submit_request function
-#' @param drop_paired A TRUE/FALSE flag that removes paired datasets from the return.
-#' @return A list of remote urls where the data is located as dodsC NetCDFs.
+#' @param response The response object made through the ooi_submit_request function.
+#' @param drop_paired A TRUE/FALSE flag that removes paired datasets from the return. Setting this to TRUE makes it easier to concatenate multiple files.
+#' @return A list of OpenDAP urls where the data is located on the OOI Thredds server as dodsC NetCDFs.
 #' @examples
-#' remote = ooi_get_location(response)
+#' remote = ooi_get_location(response,drop_paired = TRUE)
 
 ooi_get_location <- function(response,drop_paired = TRUE){
   require(jsonlite)  #jsonlite is required for this function to work.

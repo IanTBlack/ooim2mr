@@ -1,8 +1,8 @@
-#' Download data located at remote locations.
+#' Take dodsC OpenDAP URLs, converts to fileServer URLs, and downloads data to a given directory as a NetCDF.
 #'
-#' @param remote A list of remote locations where OOI data is located. Must all be from the same instrument type.
+#' @param remote A list of OpenDAP urls where OOI data is located. Must all be from the same instrument type.
 #' @param directory Default is to use the current working directory. If a directory is set in an R readable fashion, data will be downloaded to that directory.
-#' @return A list of full filepath filenames where the data was downloaded.
+#' @return A list of full filepath filenames where the data was downloaded. Further utilized by the ooi_get_data() function.
 #' @examples
 #' local = ooi_download_data(remote,'C:/Users/Ian/Desktop') #Downloads data to my desktop.
 
