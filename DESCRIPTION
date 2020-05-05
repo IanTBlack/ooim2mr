@@ -4,9 +4,19 @@ Title: A set of functions for navigating the OOI M2M system via R.
 Version: 0.1.0
 Author: Ian Black
 Maintainer: Ocean Observatories Initiative <help@oceanobservatories.org>
-Description: This package provides a set of functions that allows users to access OOI scientific data.
+Description: This package provides a set of functions that allows users to access and download OOI scientific data through requests to the OOI machine-to-machine system.
     Use of this package requires preliminary knowledge of OOI assets and their locations.
     A list of OOI sites can be found here: https://oceanobservatories.org/site-list/
+Depends: R(>= 3.6.3)
+Imports: crayon,
+         httr,
+         jsonlite,
+         ncdf4,
+         stringr
+Suggests: ggplot2,
+          RColorBrewer
 License: CC0
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/oceanobservatories/ooim2mr
+BugReports: https://github.com/oceanobservatories/ooim2mr/issues
