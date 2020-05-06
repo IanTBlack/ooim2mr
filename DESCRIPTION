@@ -20,6 +20,5 @@ Suggests:
 License: CC0
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/oceanobservatories/ooim2mr
 BugReports: https://github.com/oceanobservatories/ooim2mr/issues
 RoxygenNote: 7.1.0
