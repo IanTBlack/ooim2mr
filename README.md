@@ -283,17 +283,19 @@ directory = 'C:\Users\Ian\Desktop\test'
 local = ooi_download_data(remote, directory)
 ```
 
-This function converts the dodsC OpenDAP URLss to fileServer URLs so
-that the data can be downloaded to the local machine. Specifying the
-directory will download the data to that directory. If left empty, the
-default action is to download data to the current R session working
-directory.
+This function converts the dodsC OpenDAP URLs to fileServer URLs so that
+the data can be downloaded to the local machine.Specifying the directory
+will download the data to that directory. If left empty, the default
+action is to download data to the current R session working directory.
 
-This function can be used if you decide to look at data offline, but it
-was initially included to allow Windows users to access the data via
-local files through ncdf4. Version 1.17 of ncdf4 struggles with opening
-some OpenDAP urls on Windows machines. If you are a MacOS or Linux R
-user, you can likely bypass this function if you do not want to download
+Files are renamed as site\_node\_instrument\_method\_deployment\_time.nc
+
+This function can be used if you want to look at data later while
+offline, but it was initially included to allow Windows users to access
+the data via local files through ncdf4. Version 1.17 of ncdf4 struggles
+with opening some OpenDAP urls on Windows machines. If you are a MacOS
+or Linux R user, you can likely bypass this function if you do not want
+to download
 data.
 
 ### ooi\_get\_data
