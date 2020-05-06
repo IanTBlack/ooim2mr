@@ -9,10 +9,12 @@
 #' response = ooi_submit_request(url,user = 'OOI-API-USERNAME-HERE',token = 'OOI-API-TOKEN-HERE')
 
 ooi_submit_request <- function(url,user,token){
-  require(httr)   #The httr package is required for this function to work.
-  response = GET(url,authenticate(user,token))  #Submit a request to the url created via ooi_create_url().
-  status = content(response,"parsed")$message$status
-  code = status_code(response)  #Get the response code.
+  #Issue the request.
+  response <- GET(url,authenticate(user,token))  #Submit a request to the url created via ooi_create_url().
+
+  #Parse the response.
+  status <- content(response,"parsed")$message$status
+  code <- status_code(response)  #Get the response code.
   cat(sprintf('Request issued at %s.\n',response$date))  #Print the time the request was made.
   if (code == 200){  #If the status code is 200...
     cat('Request successful (200).\n')
