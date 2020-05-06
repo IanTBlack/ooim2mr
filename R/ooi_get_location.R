@@ -10,11 +10,10 @@ ooi_get_location <- function(response,drop_paired = TRUE){
   require(jsonlite)  #jsonlite is required for this function to work.
   require(stringr)  #stringr is required for this function to work.
   require(httr)  #httr is required for this function to work.
-  require(crayon)
   info = fromJSON(content(response,"text",encoding = "UTF-8"),flatten=TRUE) #Pull information from the response.
   thredds_status = status_code(GET(info$outputURL))  #Query the outputURL and return the status_code.
   if (thredds_status == 503){  #If the status code is 503, issue the following message.
-    cat(red('Status Code 503: The OOI THREDDS server is undergoing maintenance or is at capacity. Try again later.\n'))
+    cat('Status Code 503: The OOI THREDDS server is undergoing maintenance or is at capacity. Try again later.\n')
     return()
   }
   cat("Checking data status until it reads complete...\n")
@@ -24,7 +23,7 @@ ooi_get_location <- function(response,drop_paired = TRUE){
     status = content(GET(check),"text") #Get the content of the status page.
     if (grepl("complete",status,fixed=TRUE) == TRUE){  #If the status says
       cat(sprintf('Request took ~%s seconds to complete.\n',i))
-      cat('For your records, the online catalog of your data request can be found here: ',underline(magenta(info$outputURL)),'\n')
+      cat('For your records, the online catalog of your data request can be found here: ',info$outputURL,'\n')
       break  #Break out of the for loop.
     }
     else{  #If it doesn't say complete.

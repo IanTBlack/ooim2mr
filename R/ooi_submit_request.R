@@ -10,26 +10,25 @@
 
 ooi_submit_request <- function(url,user,token){
   require(httr)   #The httr package is required for this function to work.
-  require(crayon)
   response = GET(url,authenticate(user,token))  #Submit a request to the url created via ooi_create_url().
   status = content(response,"parsed")$message$status
   code = status_code(response)  #Get the response code.
   cat(sprintf('Request issued at %s.\n',response$date))  #Print the time the request was made.
   if (code == 200){  #If the status code is 200...
-    cat(green('Request successful (200).\n'))
+    cat('Request successful (200).\n')
     return(response)  #...return the response object.
   }
   else if(code == 400){  #If the status code is 400...
-    cat(red('Bad request (400).\n'))
-    cat(red(status))
+    cat('Bad request (400).\n')
+    cat(status)
   }
   else if(code == 404){  #If the status code is 404...
-    cat(red('Not found (404).\n'))
-    cat(red(status))
+    cat('Not found (404).\n')
+    cat(status)
   }
   else {
-    cat(yellow(sprintf('Unanticipated error code (%s).', code)))  #If the status code is not one of the above three, link to other possible codes.
-    cat(yellow(status))
-    cat(yellow('List of codes here: https://github.com/psf/requests/blob/master/requests/status_codes.py'))
+    cat(sprintf('Unanticipated error code (%s).', code))  #If the status code is not one of the above three, link to other possible codes.
+    cat(status)
+    cat('List of codes here: https://github.com/psf/requests/blob/master/requests/status_codes.py')
   }  #End of elif ladder.
 } #End of function.

@@ -10,7 +10,6 @@
 #' availability = ooi_check_availability('CE01ISSM','SEAFLOOR','CTD','OOI-API-USERNAME-HERE','OOI-API-TOKEN-HERE')
 
 ooi_check_availability <- function(site,node,instrument,user,token){
-  require(crayon)
   require(httr)
   require(jsonlite)
   lookup <- read.csv("https://raw.githubusercontent.com/IanTBlack/OOIM2M_R/master/OOI_M2M_Science_Curated.csv",header=TRUE)  #Read in the curated CSV.

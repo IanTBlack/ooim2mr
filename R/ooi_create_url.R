@@ -17,7 +17,6 @@
 
 
 ooi_create_url <- function(site = "",node = "",instrument = "",method = "",stream = "",start_date = '2010-01-01',start_time = '00:00:00',stop_date = '2040-12-31',stop_time = '23:59:59'){
-  require(crayon)
   lookup <- read.csv("https://raw.githubusercontent.com/IanTBlack/OOIM2M_R/master/OOI_M2M_Science_Curated.csv",header=TRUE)  #Read in the curated CSV.
   lookup <- lookup[grep(toupper(site),lookup[,'SITE']),]  #Drop rows that don't have the user-defined site.
 
@@ -27,7 +26,7 @@ ooi_create_url <- function(site = "",node = "",instrument = "",method = "",strea
   else if(nchar(node) >= 6){  #If it is greater than six characters, assume they are using the simplified node name.
     lookup <- lookup[grep(toupper(node),lookup[,'SIMPLENODE']),] #Drop based on the simple node.
   } else{
-    cat(yellow("Please enter a node ID or keyword."))
+    cat("Please enter a node ID or keyword.")
   }
 
   lookup <- lookup[grep(toupper(instrument),lookup[,'INSTRUMENT']),] #Drop rows that don't match in the user specified instrument.
@@ -38,12 +37,12 @@ ooi_create_url <- function(site = "",node = "",instrument = "",method = "",strea
     window = sprintf('?beginDT=%sT%s.000Z&endDT=%sT%s.999Z',start_date,start_time,stop_date,stop_time)
     url = sprintf('%s%s',url,window)  #Combine the url and time window string.
     cat('Here is the request URL generated from the information you provided.\n')
-    cat(green(url),'\n')
+    cat(url,'\n')
     return(url)
     }
   else if(nrow(lookup) > 1 && stream==""){  #If there is more than one row and the user didn't specify a stream.
-    cat(yellow('More than one (1) possible URL returned from the lookup table.\n'))  #Issue the following.
-    cat(yellow(paste('If you only want one instrument and stream, please review possible methods and streams and specify through the function',"'",'s method or stream parameter.\n',sep = "")))
+    cat('More than one (1) possible URL returned from the lookup table.\n')  #Issue the following.
+    cat(paste('If you only want one instrument and stream, please review possible methods and streams and specify through the function',"'",'s method or stream parameter.\n',sep = ""))
     url = lookup$URL
     window = sprintf('?beginDT=%sT%s.000Z&endDT=%sT%s.999Z',start_date,start_time,stop_date,stop_time)
     url = paste(url,window,sep = "")  #Combine the url and time window string.
@@ -53,7 +52,7 @@ ooi_create_url <- function(site = "",node = "",instrument = "",method = "",strea
   else if(nrow(lookup) > 1 && stream!=""){  #If they did specify a stream...
     lookup <- lookup[grep(tolower(stream),lookup[,'STREAM']),]
     if (nrow(lookup) == 0){
-      cat(red('Looks like the stream you input does not work with the site, node, instrument, or method you specified.'))
+      cat('Looks like the stream you input does not work with the site, node, instrument, or method you specified.')
       return()
     }
     else{
@@ -61,11 +60,11 @@ ooi_create_url <- function(site = "",node = "",instrument = "",method = "",strea
       window = sprintf('?beginDT=%sT%s.000Z&endDT=%sT%s.999Z',start_date,start_time,stop_date,stop_time)
       url = paste(url,window,sep = "")  #Combine the url and time window string.
       cat('Here is the request URL generated from the information you provided.\n')
-      cat(green(url),'\n')
+      cat(url,'\n')
       return(url)}
     }
   else{
-      cat(red('The lookup table couldn\'t generate a request URL from your inputs.\n'))
+      cat('The lookup table couldn\'t generate a request URL from your inputs.\n')
       return()
       }  #End of confusing elif ladder.
 }  #End of function.

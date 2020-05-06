@@ -14,7 +14,6 @@
 ooi_get_data <- function(local,simplify_data = TRUE){
   require(stringr)
   require(ncdf4)
-  require(crayon)
   if(simplify_data == TRUE){
     nc = nc_open(local[1])  #Open the first file...
     id = ncatt_get(nc,0,'id')$value
