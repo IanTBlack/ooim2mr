@@ -14,13 +14,13 @@ ooi_get_location <- function(response,drop_paired = TRUE){
     cat('Status Code 503: The OOI THREDDS server is undergoing maintenance or is at capacity. Try again later.\n')
     return()
   }
-  cat("Checking data status until it reads complete...\n")
+  cat("Checking data status...\n")
   check <-sprintf('%s%s',info$allURLs[2],'/status.txt')
   pb <- txtProgressBar(min = 0, max = 600,style = 1)  #Create a text progress bar.
   for (i in 1:1800){  #Check the request status once per second for the next 30 minutes.
     status <- content(GET(check),"text") #Get the content of the status page.
     if (grepl("complete",status,fixed=TRUE) == TRUE){  #If the status says
-      cat(sprintf('Request took ~%s seconds to complete.\n',i))
+      cat(sprintf('\nRequest took ~%s seconds to complete.\n',i))
       cat('For your records, the online catalog of your data request can be found here: ',info$outputURL,'\n')
       break  #Break out of the for loop.
     }
