@@ -17,7 +17,6 @@ Imports: httr,
 Suggests: 
     ggplot2,
     RColorBrewer,
-    testthat
 License: CC0
 Encoding: UTF-8
 LazyData: true
