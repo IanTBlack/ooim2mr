@@ -10,6 +10,7 @@ from pandas.io.json import json_normalize
 
 
 os.chdir(r'')
+master = pd.read_csv(r'')
 user = ''   #OOI API user for OOI.CSPP@gmail.com 
 token = ''   #OOI API token for OOI.CSPP@gmail.com
 
@@ -20,8 +21,6 @@ sensor_url = '12576/sensor/inv/'                             # Sensor informatio
 anno_url = '12580/anno/'                                     # Annotations information.
 stream_url = '12575/stream/'                          # Streams information.
 
-#Read in the previously build master file.
-master = pd.read_csv(r'C:\Users\Ian\Desktop\OOI_M2M_CSV\ooi_master.csv')
 
 #Request available streams from the OOI API.
 r = requests.get(base_url + stream_url,auth = (user,token)).json()  #Request all OOI streams and throw it into a JSON object.
