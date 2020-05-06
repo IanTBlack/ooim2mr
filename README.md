@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ooim2mr <img src="man/figures/ooi-logo.jpg" align = "right" height = "50" />
+# ooim2mr <img src="man/figures/ooi-logo.jpg" align = "right" height = "50" /> <img src="man/figures/nsf-logo.png" align = "right" height = "50" />
 
 <!-- badges: start -->
 
