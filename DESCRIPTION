@@ -1,6 +1,6 @@
 Package: ooim2mr
 Type: Package
-Title: Functions For Gathering Science Data From The OOI M2M System
+Title: Functions For Gathering Science Data From The OOI M2M System Via R
 Version: 1.0.0
 Author: Ian Black
 Maintainer: Ocean Observatories Initiative <help@oceanobservatories.org>
