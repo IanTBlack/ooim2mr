@@ -24,7 +24,7 @@ ooi_get_data <- function(local,simplify_data = TRUE){
     stream <- banana[[1]][6]
 
     #Bring in the science lookup table.
-    lookup <- import("data/ooi_science.rda")
+    lookup <- ooi_science
     lookup <- lookup[grep(site,lookup[,'SITE']),]  #Remove rows that don't match these conditions.
     lookup <- lookup[grep(node,lookup[,'NODE']),]
     lookup <- lookup[grep(instrument,lookup[,'INSTRUMENT']),]

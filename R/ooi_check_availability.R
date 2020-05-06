@@ -10,7 +10,7 @@
 #' availability = ooi_check_availability('CE01ISSM','SEAFLOOR','CTD','OOI-API-USERNAME-HERE','OOI-API-TOKEN-HERE')
 
 ooi_check_availability <- function(site,node,instrument,user,token){
-  lookup <- import("data/ooi_science.rda")
+  lookup <- ooi_science
   lookup <- lookup[grep(toupper(site),lookup[,'SITE']),]  #Drop rows that don't have the user-defined site.
   if (nchar(node) <= 5){  #If the user enters five characters, assume it is a specific node.
     lookup <- lookup[grep(toupper(node),lookup[,'NODE']),]  #Drop rows that don't have the user-defined node.

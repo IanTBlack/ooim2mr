@@ -18,7 +18,7 @@
 
 ooi_create_url <- function(site = "",node = "",instrument = "",method = "",stream = "",start_date = '2010-01-01',start_time = '00:00:00',stop_date = '2040-12-31',stop_time = '23:59:59'){
   # Load the lookup table.
-  lookup <- import("data/ooi_science.rda")
+  lookup <- ooi_science
 
   # Parse lookup table by site, node, instrument, and method.
   lookup <- lookup[grep(toupper(site),lookup[,'SITE']),]  #Drop rows that don't have the user-defined site.
