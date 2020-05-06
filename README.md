@@ -22,6 +22,10 @@ with:
 devtools::install_github("oceanobservatories/ooim2mr")
 ```
 
+This package was built and testing in RStudio. It is recommended that
+you utilize this package through the [RStudio integrated development
+environment](https://rstudio.com/products/rstudio/download/).
+
 ## Bugs, Issues, and Functionality Requests
 
 ### General
