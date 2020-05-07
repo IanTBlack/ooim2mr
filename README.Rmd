@@ -11,7 +11,7 @@ output: github_document
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 <!-- badges: end -->
 
-The goal of ooim2mr is to provide users a programmatic method for accessing Ocean Observatories Initiative (OOI) scientific data via R.
+The goal of ooim2mr is to provide users a programmatic method for accessing [Ocean Observatories Initiative (OOI)](https://oceanobservatories.org/) scientific data via R. Please review the [OOI Data Usage Policy](https://oceanobservatories.org/usage-policy/) if you plan to cite OOI data.
 
 ## Installation
 Install the development version of ooim2mr from this GitHub repository with:
