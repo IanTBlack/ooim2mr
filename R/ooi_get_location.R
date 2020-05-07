@@ -60,7 +60,7 @@ ooi_get_location <- function(response,drop_paired = TRUE){
       }
 
       #Special cases: PCO2
-      if (grepl("data_record_cal",remote[i])==TRUE){   #Drop calibration stream for pco2 data.
+      if (grepl("data_record_cal",remote[i])==TRUE || grepl("pco2w_abc_instrument_blank",remote[i])==TRUE ){   #Drop calibration stream for pco2 data.
         remote[i] <- 'drop_me'
       }
 
