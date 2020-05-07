@@ -66,8 +66,16 @@ Repository](https://github.com/oceanobservatories/ooi-data-explorations/tree/mas
 ## Usage
 
 Most functions in this package require an internet connection to submit
-requests or download data through the OOI
-API.
+requests or download data through the OOI API. The following libraries
+are also needed when utilizing this
+package.
+
+| Required Package | Install Command           | Use                                     |
+| ---------------- | ------------------------- | --------------------------------------- |
+| httr             | install.packages(“httr”)  | For submitting requests to OOINet.      |
+| ncdf4            | install.packages(“ncdf4”) | For opening NetCDFs.                    |
+| stringr          | require(stringr)          | For parsing the lookup table.           |
+| jsonlite         | require(jsonlite)         | For interpreting responses from OOINet. |
 
 ### ooi\_site\_info
 
