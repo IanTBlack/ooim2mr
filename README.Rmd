@@ -4,8 +4,6 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-
-
 # ooim2mr <img src="man/figures/ooi-logo.jpg" align = "right" height = "50" /> <img src="man/figures/nsf-logo.png" align = "right" height = "50" /> 
 <!-- badges: start -->
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
@@ -21,7 +19,7 @@ Install the development version of ooim2mr from this GitHub repository with:
 devtools::install_github("oceanobservatories/ooim2mr")
 ```
 
-This package was built and testing in RStudio. It is recommended that you utilize this package through the [RStudio integrated development environment](https://rstudio.com/products/rstudio/download/).
+This package was built and tested in RStudio. It is recommended that you utilize this package through the [RStudio integrated development environment](https://rstudio.com/products/rstudio/download/).
 
 ## Bugs, Issues, and Functionality Requests
 
@@ -42,9 +40,30 @@ For functionality requests, please submit those directly to the OOI Helpdesk wit
 ## Examples
 Example R scripts can be found on the [OOI Data Explorations GitHub Repository](https://github.com/oceanobservatories/ooi-data-explorations/tree/master/R).
 
+### Quick Example
+
+```{r,eval = FALSE}
+# Quick example that downloads and brings in all CE01ISSP CTD data for the lifespan of the project.
+
+require(ooim2mr)
+require(httr)
+require(ncdf4)
+require(stringr)
+require(jsonlite)
+
+url = ooi_create_url(site = 'CE01ISSP',node = 'PROFILER',instrument = 'CTD', method = 'recovered') #Use default times.
+response = ooi_submit_request(url,'OOI-API-USER','OOI-API-TOKEN')  #Submit the request to OOINet.
+remote = ooi_get_location(response,drop_paired = TRUE)  #Get the dodsC OpenDAP urls of the data.
+local = ooi_download_data(remote,'C:\Users\Ian\Desktop\test')  #Download the data and return the filepaths.
+CTD = ooi_get_data(local,simplify_data = FALSE)  #Read in ALL variables from the NetCDFs.
+data = data.frame(CTD[['data']])  #First sublist is always the data.
+variables = data.frame(CTD[['variables_units']])  #Second sublist is always the variables and units of the dataset.
+```
+
+
 
 ## Usage
-Most functions in this package require an internet connection to submit requests or download data through the OOI API. The following libraries are also needed when utilizing this package.
+Most functions in this package require an internet connection to submit requests or download data through the OOI API. The following native and CRAN packages are also needed when utilizing this package.
 
 | Required Package | Install Command | Use |
 | -------------------- | ------------------- | ------------------- |
@@ -131,10 +150,10 @@ The node is generally a five (5) character designator. If inputting a node that 
 | -------------------- | ------------------- |
 | Surface | Surface Buoys (SBC11, SBD11, SBD12, SBD17, SBS01) |
 | Midwater | Near Surface Instrument Frames (7m, 12m), Mooring Risers (RI000,RII01,RII11,RIM01, RIS01, RID16, RID27, RID26, RIC21, PC03A, PC01A, PC01B) |
-| Seafloor | Multi-funciton Nodes, Benthic Packages (MFD35, MFC31, MFD37, LJ01D, MJ01C, LJ01C, LV01C, PN01C, PN01D, LV01A, PN01B, LJ01A, PN01B, MJ01A,PN01A, LJ01B, PN03B, MJ03E, MJ03F, MJ03C, MJ03D, MJ03A) |
+| Seafloor | Multi-function Nodes, Benthic Packages (MFD35, MFC31, MFD37, LJ01D, MJ01C, LJ01C, LV01C, PN01C, PN01D, LV01A, PN01B, LJ01A, PN01B, MJ01A,PN01A, LJ01B, PN03B, MJ03E, MJ03F, MJ03C, MJ03D, MJ03A) |
 | Profiler | Moorings With One Profiler (SP001, SP002, WFP01, SF03A, SF01A, DP01A, DP03A, DP01B, SF01B) |
-| Upper_Profiler | WFP02 |
-| Lower_Profiler | WFP03 |
+| Upper_Profiler | Moorings With Two Profilers (WFP02) |
+| Lower_Profiler | Moorings With Two Profilers (WFP03) |
 
 Glider nodes are the glider's unique serial number. If you are looking for glider data, it is recommended that you use the Glider DAC to access OOI glider data.
 
@@ -143,7 +162,7 @@ Example: Using SEAFLOOR as the node is the same thing as MFD35.
 #### instrument
 The instrument is generally a twelve (12) character designator, with the third character being a dash (-). Substring replacement can be used when parsing the lookup table.
 
-Example: Using CTD as the instrument is the same thing as 02-CTDMOH051.
+Example: Using 051 as the instrument is the same thing as 02-CTDMOH051.
 
 #### method
 The method is how you want to get the data. It can also be simplified using a substring when also considering the site, node, and instrument.
@@ -208,7 +227,7 @@ directory = 'C:\Users\Ian\Desktop\test'
 local = ooi_download_data(remote, directory)
 
 ```
-This function converts the dodsC OpenDAP URLs to fileServer URLs so that the data can be downloaded to the local machine.Specifying the directory will download the data to that directory. If left empty, the default action is to download data to the current R session working directory.
+This function converts the dodsC OpenDAP URLs to fileServer URLs so that the data can be downloaded to the local machine. Specifying the directory will download the data to that directory. If left empty, the default action is to download data to the current R session working directory.
 
 Files are renamed as site_node_instrument_method_deployment_time.nc
 
@@ -224,7 +243,8 @@ data_variables = ooi_get_data(local, simplify_data = TRUE)
 data = data.frame(data_variables[['data]])
 variables = data.frame(data_variables[['variables_units]])
 ```
-This function will bring data into the work space an attempt to merge it as a dataframe if the data is 1D. If the data is 2D, it remains a list of lists. The return for this function is a list of lists. List one contains the data. List two contains a dataframe of variables that were brought and the units associated with those variables.
+
+This function will bring data into the work space and attempt to merge it as a dataframe if the data is 1D. If the data is 2D, it remains a list of lists. The return for this function is a list of lists. List one contains the data. List two contains a dataframe of variables that were brought and the units associated with those variables.
 
 By default, the simplify_data flag is set to TRUE. This removes confusing variables and leaves mostly first order or greater data products. Setting this flag to FALSE will bring in all variables available in the NetCDF.
 
