@@ -63,26 +63,6 @@ Helpdesk with “ooim2mr” in the subject line:
 Example R scripts can be found on the [OOI Data Explorations GitHub
 Repository](https://github.com/oceanobservatories/ooi-data-explorations/tree/master/R).
 
-### Quick Example
-
-``` r
-# Quick example that downloads and brings in all CE01ISSP CTD data for the lifespan of the project.
-
-require(ooim2mr)
-require(httr)
-require(ncdf4)
-require(stringr)
-require(jsonlite)
-
-url = ooi_create_url(site = 'CE01ISSP',node = 'PROFILER',instrument = 'CTD', method = 'recovered') #Use default times.
-response = ooi_submit_request(url,'OOI-API-USER','OOI-API-TOKEN')  #Submit the request to OOINet.
-remote = ooi_get_location(response,drop_paired = TRUE)  #Get the dodsC OpenDAP urls of the data.
-local = ooi_download_data(remote,'C:\Users\Ian\Desktop\test')  #Download the data and return the filepaths.
-CTD = ooi_get_data(local,simplify_data = FALSE)  #Read in ALL variables from the NetCDFs.
-data = data.frame(CTD[['data']])  #First sublist is always the data.
-variables = data.frame(CTD[['variables_units']])  #Second sublist is always the variables and units of the dataset.
-```
-
 ## Usage
 
 Most functions in this package require an internet connection to submit
