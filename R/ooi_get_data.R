@@ -93,6 +93,7 @@ ooi_get_data <- function(local,simplify_data = TRUE){
     }  #End of variables for loop.
     names(hold) <- variables
     lol[[i]] <- hold  #Positionally assign the list of variables to the list of files.
+    cat(sprintf('Data from file (%s) has been read in.',i))
     nc_close(nc)  #Close the NetCDF.
   }  #End of filenames for loop.
   names(lol) <- local
