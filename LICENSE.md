@@ -1,4 +1,4 @@
-## ooim2mr is charityware.
+# ooim2mr is charityware
 You can use and copy it as much as you like, but you are encouraged to make a 
 donation to the American Civil Liberties Union (www.aclu.org) if you find it useful.
 
