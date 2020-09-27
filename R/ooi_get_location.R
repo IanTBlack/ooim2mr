@@ -52,9 +52,12 @@ ooi_get_location <- function(response,drop_paired = TRUE){
       paired <- banana[[1]][4]
 
       #Paired datasets
-      if(grepl("CTD",requested) == TRUE || grepl("VEL",requested) == TRUE || grepl("ENG",requested) == TRUE){  #If the user requested CTD or VEL data, then we don't need to get rid of any superfluous data.
+      if(grepl("CTD",requested) == TRUE || grepl("ENG",requested) == TRUE){  #If the user requested CTD or VEL data, then we don't need to get rid of any superfluous data.
         break
-        }
+      }
+      else if(grepl("VEL",requested) == TRUE & grepl("CTD",paired) == TRUE){
+        remote[i] <- 'drop_me'
+      }
       else if(isTRUE(requested != paired)){ #If there is CTD or VEL data and the user didn't request it. Remove it from the location set.
         remote[i] <- 'drop_me'
       }
@@ -63,10 +66,9 @@ ooi_get_location <- function(response,drop_paired = TRUE){
       if (grepl("data_record_cal",remote[i])==TRUE || grepl("pco2w_abc_instrument_blank",remote[i])==TRUE || grepl("pco2w_abc_dcl_instrument_blank",remote[i])==TRUE ){   #Drop calibration stream for pco2 data.
         remote[i] <- 'drop_me'
       }
-
     }
     remote  <- remote[!remote =="drop_me"]
-  } else {
+  } else{
     remote <- remote
   }
   cat("Data are now available to download at these remote location(s).\n")
